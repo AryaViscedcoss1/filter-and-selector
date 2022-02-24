@@ -50,11 +50,7 @@ function display()
 }
 $(document).ready(function()
 {  
- 
-  
-
-  display();
-  
+   display(); 
 });
 
 function displayitems(items,index,array)
@@ -76,6 +72,7 @@ function displayitems(items,index,array)
 }
 
 //dropdown crete
+var flag=0;
 function createDropdown()
 {
 
@@ -91,78 +88,129 @@ function createDropdown()
   elements('Microsoft','brand',dropdownbuttonsarrayb)
 
   // dropdown button
-  var dd_BY_brand=$("<select for='cars' class='title'>Filter by OS</select>");
+  var tempbrand=[];
+  var tempos=[];
+  var dd_BY_brand=$("<select for='cars' class='title'>Filter</select>");
   $('#wrapper').append(dd_BY_brand);
-  dropdownbuttonsarraya.forEach(function c(v,i,a)
+  $(dd_BY_brand).append("<option >Filter by brand</option>");
+  $(dd_BY_brand).append("<option value='Apple'>Apple</option>");
+  $(dd_BY_brand).append("<option value='Motorola'>Motorola</option>");
+  $(dd_BY_brand).append("<option value='Samsung'>Samsung</option>");
+  $(dd_BY_brand).append("<option value='ASUS'>ASUS</option>");
+  $(dd_BY_brand).append("<option value='Microsoft'>Microsoft</option>");
+  /*dropdownbuttonsarraya.forEach(function c(v,i,a)
   {
+   
     $(dd_BY_brand).append(v);
-  })
+  })*/
 
 
   $(dd_BY_brand).change(function(){ 
 
     var value = $(this).val();
+    console.log(value)
 
-      var tempa= filterWork(value,'os');
+      tempos= filterWork(value,'brand');
+    
+        
       removetableelment();
-      tempa.forEach(function(items,index,array)
+      console.log(tempos,tempbrand);
+      var temp= campair(tempos,tempbrand);
+     
+      temp.forEach(function(items,index,array)
       {
-      displayitems(items,index,array);
-      }); 
+        displayitems(items,index,array);
+      
+      });
   
   });
 
   
 
-  $(dd_BY_brand).click(function (e) { 
+  /*$(dd_BY_brand).click(function (e) { 
      dropdownbuttonsarraya.forEach(function c(v,i,a)
       {
         v.show();
       })
-  
+
   
   });
-
+*/
 
 
   
 
-  var dd_BY_os=$("<select for='cars'>Filter by BRAND</select>");
+  var dd_BY_os=$("<select for='cars'>Filter</select>");
   $('#wrapper').append(dd_BY_os);
-
-  dropdownbuttonsarrayb.forEach(function c(v,i,a)
-  {
+ /* $(dd_BY_os).append("<option >Filter by Os</option>");
+  elements('Android','os',dropdownbuttonsarraya);
+  elements('Windows','os',dropdownbuttonsarraya);
+  elements('iOS','os',dropdownbuttonsarraya);*/
+  $(dd_BY_os).append("<option >Filter by Os</option>");
+  $(dd_BY_os).append("<option value='Android'>Android</option>");
+  $(dd_BY_os).append("<option value='Windows'>Windows</option>");
+  $(dd_BY_os).append("<option value='iOS'>iOS</option>");
+  /*dropdownbuttonsarrayb.forEach(function c(v,i,a)
+  { 
+   
     $(dd_BY_os).append(v);
-  })
+  })*/
    $(dd_BY_os).change(function(){ 
     var value = $(this).val();
+    console.log(value)
 
-      var tempa= filterWork(value,'brand');
-      removetableelment();
-      tempa.forEach(function(items,index,array)
+      tempbrand= filterWork(value,'os');
+    
+        removetableelment();
+        console.log(tempos,tempbrand);
+      var temp= campair(tempos,tempbrand);
+
+      temp.forEach(function(items,index,array)
       {
-      displayitems(items,index,array);
-      }); 
+        displayitems(items,index,array);
+      
+      });
   
   });
-  $(dd_BY_os).click(function (e) { 
- 
+ /* $(dd_BY_os).click(function (e) { 
+   
     dropdownbuttonsarrayb.forEach(function c(v,i,a)
     {
       v.show();
     })
-    });
+    });*/
   
 }
 
 sreach();
+function campair(array1,array2)
+{
 
+  a=[];
+  for(i=0;i<(array1.length);i++)
+  {
+    for(j=0;j<(array2.length);j++)
+    {
+      if(array2[j]==array1[i])
+      {
+        console.log(array2[j],array1[i])
+        a.push(array1[i])
+      }
+  
+    }
+
+  }
+  return a;
+
+}
 function filterWork(input,el)
 { 
+  
   temparray=[];
   for(i=0;i<(products.length);i++)
-  {
-    if(products[i][el]===input)
+  { 
+    console.log(products[i][el],input)
+    if(products[i][el]==input)
     {
       console.log(products[i][el])
       temparray.push(products[i])
@@ -172,6 +220,7 @@ function filterWork(input,el)
   return temparray;
 
 }
+
 
 function removetableelment()
 {
@@ -196,7 +245,6 @@ function tableoutlook()
 
 function elements(a,b,ar)
 {
-  var z="d_BY_brand"+a
   var z=$("<option value="+a+">"+a+"</option>");
   ar.push(z)
   z.hide();
