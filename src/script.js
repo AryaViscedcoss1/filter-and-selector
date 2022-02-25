@@ -115,6 +115,14 @@ function createDropdown()
         
       removetableelment();
       console.log(tempos,tempbrand);
+      if(tempbrand.length == 0)
+      {
+        tempos.forEach(function(items,index,array)
+    {
+      displayitems(items,index,array);
+    
+    });
+      }
       var temp= campair(tempos,tempbrand);
      
       temp.forEach(function(items,index,array)
@@ -127,34 +135,18 @@ function createDropdown()
 
   
 
-  /*$(dd_BY_brand).click(function (e) { 
-     dropdownbuttonsarraya.forEach(function c(v,i,a)
-      {
-        v.show();
-      })
-
   
-  });
-*/
 
 
   
 
   var dd_BY_os=$("<select for='cars'>Filter</select>");
   $('#wrapper').append(dd_BY_os);
- /* $(dd_BY_os).append("<option >Filter by Os</option>");
-  elements('Android','os',dropdownbuttonsarraya);
-  elements('Windows','os',dropdownbuttonsarraya);
-  elements('iOS','os',dropdownbuttonsarraya);*/
   $(dd_BY_os).append("<option >Filter by Os</option>");
   $(dd_BY_os).append("<option value='Android'>Android</option>");
   $(dd_BY_os).append("<option value='Windows'>Windows</option>");
   $(dd_BY_os).append("<option value='iOS'>iOS</option>");
-  /*dropdownbuttonsarrayb.forEach(function c(v,i,a)
-  { 
-   
-    $(dd_BY_os).append(v);
-  })*/
+  
    $(dd_BY_os).change(function(){ 
     var value = $(this).val();
     console.log(value)
@@ -163,6 +155,14 @@ function createDropdown()
     
         removetableelment();
         console.log(tempos,tempbrand);
+        if(tempos.length == 0)
+        {
+          tempbrand.forEach(function(items,index,array)
+      {
+        displayitems(items,index,array);
+      
+      });
+        }
       var temp= campair(tempos,tempbrand);
 
       temp.forEach(function(items,index,array)
